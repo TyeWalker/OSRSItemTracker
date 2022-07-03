@@ -20,7 +20,7 @@ def fetchrequest(route):
 
 
 # API connections
-apiurl = "https://localhost:7174/"
+apiurl = "http://localhost:5214/"
 headers = {
     'Content-type':'application/json',
     'Accept':'application/json'

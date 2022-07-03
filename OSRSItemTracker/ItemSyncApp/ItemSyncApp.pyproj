@@ -21,6 +21,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ApiClasses.py" />
+    <Compile Include="ApiConnection.py" />
+    <Compile Include="DataManagement.py" />
+    <Compile Include="ItemSets.py" />
     <Compile Include="ItemSyncApp.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

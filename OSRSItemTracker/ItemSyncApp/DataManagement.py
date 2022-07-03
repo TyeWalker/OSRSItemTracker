@@ -38,7 +38,7 @@ def updatelatestprices():
                 highTime = 0 if itemlist[y]['highTime'] is None else itemlist[y]['highTime']
                 low = 0 if itemlist[y]['low'] is None else itemlist[y]['low']
                 lowTime = 0 if itemlist[y]['lowTime'] is None else itemlist[y]['lowTime']
-                price = ApiClasses.Price(y, int(high), str(datetime.date.fromtimestamp(highTime)), int(low), str(datetime.date.fromtimestamp(lowTime)))
+                price = ApiClasses.Price(y, int(high), str(datetime.datetime.fromtimestamp(highTime)), int(low), str(datetime.datetime.fromtimestamp(lowTime)))
                 jsonprice = json.dumps(price.__dict__)
                 result = ApiConfig.posttoapi("price/" + str(y), jsonprice)
                 if result.status_code == 200:

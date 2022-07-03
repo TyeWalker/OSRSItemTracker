@@ -85,9 +85,9 @@ namespace TrackerAPI.Models
             {
                 ItemId = model.ItemId,
                 HighPrice = model.HighPrice,
-                HighTime = model.HighTime,
+                HighTime = DateTime.Parse(model.HighTime),
                 LowPrice = model.LowPrice,
-                LowTime = model.LowTime,
+                LowTime = DateTime.Parse(model.LowTime),
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
@@ -100,8 +100,8 @@ namespace TrackerAPI.Models
             priceEntity.ItemId = model.ItemId == 0 ? priceEntity.ItemId : model.ItemId;
             priceEntity.HighPrice = model.HighPrice;
             priceEntity.LowPrice = model.LowPrice;
-            priceEntity.HighTime = model.HighTime;
-            priceEntity.LowTime = model.LowTime;
+            priceEntity.HighTime = DateTime.Parse(model.HighTime);
+            priceEntity.LowTime = DateTime.Parse(model.LowTime);
             priceEntity.ModifiedDate = DateTime.Now;
 
             return priceEntity;
@@ -115,8 +115,8 @@ namespace TrackerAPI.Models
             priceEntity.ItemId = model.ItemId == 0 ? priceEntity.ItemId : model.ItemId;
             priceEntity.HighPrice = model.HighPrice;
             priceEntity.LowPrice = model.LowPrice;
-            priceEntity.HighTime = model.HighTime;
-            priceEntity.LowTime = model.LowTime;
+            priceEntity.HighTime = DateTime.Parse(model.HighTime);
+            priceEntity.LowTime = DateTime.Parse(model.LowTime);
             priceEntity.ModifiedDate = DateTime.Now;
 
             return priceEntity;

@@ -2,6 +2,8 @@ import datetime
 import time
 import threading
 import DataManagement
+import urllib3
+
 
 sleep_latestprice = 120  # Updates every 120 seconds
 sleep_oneHourVolume = 3300  # Updates every 55 minutes
@@ -57,13 +59,17 @@ thread_onedayvolume = threading.Thread(target=onedayvolumethread)
 
 
 if __name__ == "__main__":
+    # ignore Unverified HTTPS request error because running locally:
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     # add all items to db
     # uncomment line below for first launch:
-    # DataManagement.senditemstodatabase()
+    DataManagement.senditemstodatabase()
     # Add Latest Prices:
     thread_latestprice.start()
-    # thread line above to run every 2 minutes
+    # thread above to run every 2 minutes
     # volume 1h:
     thread_onehourvolume.start()
+    # thread above to run every 55 minutes
     # volume 24h:
     thread_onedayvolume.start()
+    # thread above to run every 1440 minutes
