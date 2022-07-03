@@ -1,4 +1,6 @@
-﻿namespace TrackerAPI.Services
+﻿using TrackerAPI.Entities;
+
+namespace TrackerAPI.Services
 {
     public interface IItemService
     {
