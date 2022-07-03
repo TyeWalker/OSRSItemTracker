@@ -1,4 +1,5 @@
-﻿using TrackerAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TrackerAPI.Data;
 using TrackerAPI.Entities;
 
 namespace TrackerAPI.Services
