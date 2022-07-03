@@ -1,5 +1,8 @@
-﻿namespace TrackerAPI.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TrackerAPI.Entities
 {
+    [Table("Volume")]
     public class VolumeEntity
     {
         public long Id { get; set; }

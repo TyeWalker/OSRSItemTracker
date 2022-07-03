@@ -1,5 +1,8 @@
-﻿namespace TrackerAPI.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TrackerAPI.Entities
 {
+    [Table("Price")]
     public class PriceEntity
     {
         public long Id { get; set; }
