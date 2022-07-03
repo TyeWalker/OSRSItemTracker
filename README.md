@@ -13,3 +13,4 @@ Currently it tracks the following item sets:
 * God-blessed dragonhide
 
 Before using this programme, please make sure you have Python 3 installed and then set the user agent [here](https://github.com/TyeWalker/OSRSItemTracker/blob/50e7e6a38269714cc917bf25172053fcc216e433/OSRSItemTracker/ItemSyncApp/ApiConnection.py) to your discord username. See [HERE](https://oldschool.runescape.wiki/w/RuneScape:Real-time_Prices#Please_set_a_descriptive_User-Agent!) for more info about user agents.
+
