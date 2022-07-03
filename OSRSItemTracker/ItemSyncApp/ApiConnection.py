@@ -3,7 +3,7 @@ import requests
 
 # OSRS url
 osrsurl = "https://prices.runescape.wiki/api/v1/osrs/"
-useragent = "Item Set Price Tracker - TFunk#7503"
+useragent = "Item Set Price Tracker - YOURDISCORD"
 
 
 # Routes:
