@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TrackerAPI.Entities;
 using TrackerAPI.Models;
 using TrackerAPI.Services;
@@ -7,6 +8,7 @@ namespace TrackerAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ItemController : Controller
     {
         private ModelFactory _modelFactory = new ModelFactory();
