@@ -1,4 +1,4 @@
-# This file is to manage data between Runelite's real-time prices and API
+# This file is to manage data between RuneLite's real-time prices and API
 import json
 import ApiConnection as ApiConfig
 import ApiClasses
@@ -13,18 +13,27 @@ sleep_oneDayVolume = 86400  # Updates every 24 hours
 
 def senditemstodatabase():
     items = ApiConfig.fetchrequest("mapping")
-    for i in ItemSets.allItemIDs:
-        for x in items:
-            if x['id'] == i:
-                item = ApiClasses.Item(x['examine'], x['id'], str(x['members']), x['lowalch'], x['limit'], x['value'],
-                                       x['highalch'], x['icon'], x['name'])
-                jsonitem = json.dumps(item.__dict__)
-                result = ApiConfig.posttoapi("item", jsonitem)
-                if result.status_code == 200:
-                    print("Added item: " + str(item.itemId))
-                elif result.status_code == 400:
-                    print("Error uploading item: " + str(item.itemId))
-                # time.sleep(1)
+    for x in items:
+
+        item_examine = x['examine'] if 'examine' in x else ""
+        item_lowalch = x['lowalch'] if 'lowalch' in x else 0
+        item_limit = x['limit'] if 'limit' in x else 0
+        item_value = x['value'] if 'value' in x else 0
+        item_highalch = x['highalch'] if 'highalch' in x else 0
+        item_icon = x['icon'] if 'icon' in x else ""
+        item_name = x['name'] if 'name' in x else ""
+
+        item = ApiClasses.Item(item_examine, x['id'], str(x['members']), item_lowalch, item_limit, item_value,
+                               item_highalch, item_icon, item_name)
+        jsonitem = json.dumps(item.__dict__)
+        result = ApiConfig.posttoapi("item", jsonitem)
+        if result.status_code == 200:
+            print("Added item: " + str(item.itemId))
+        elif result.status_code == 400:
+            print("Error uploading item: " + str(item.itemId))
+        else:
+            print("Unknown error for item: " + str(item.itemId))
+            # time.sleep(1)
 
 
 # itemId, high, highTime, low, lowTime
