@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrackerAPI.Migrations
 {
-    public partial class createdatabase : Migration
+    public partial class updatePrice : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,10 +39,9 @@ namespace TrackerAPI.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ItemId = table.Column<long>(type: "bigint", nullable: false),
-                    HighPrice = table.Column<long>(type: "bigint", nullable: false),
-                    HighTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LowPrice = table.Column<long>(type: "bigint", nullable: false),
-                    LowTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PriceValue = table.Column<long>(type: "bigint", nullable: false),
+                    PriceTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BuyOrSell = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

@@ -54,12 +54,11 @@ namespace TrackerAPI.Controllers
         #region POST
 
         // insert new price
-        [HttpPost("{itemId}")]
-        public async Task<IActionResult> Post(long itemId, [FromBody] PricePostModel model)
+        [HttpPost()]
+        public async Task<IActionResult> Post([FromBody] ItemPricePostModel model)
         {
-            if (itemId != model.ItemId)
-                return BadRequest("Invalid ItemId");
-
+            if(model.ItemId == 0)
+                return BadRequest("ItemId is 0.");
             if (model == null)
                 return BadRequest("Post model is null");
 
@@ -68,16 +67,20 @@ namespace TrackerAPI.Controllers
                 return BadRequest("Error creating item");
             // check if latest price already exists
 
-            var existingItem = await _priceService.VerifyPriceDoesNotExist(created);
-            if (existingItem != null)
+            var existingBuyPrice = await _priceService.VerifyPriceDoesNotExist(created[0]);
+            var existingSellPrice = await _priceService.VerifyPriceDoesNotExist(created[1]);
+
+            if (existingBuyPrice != null && existingSellPrice != null)
                 return BadRequest("Item already exists, use PUT/PATCH to update the item.");
 
-            var result = await _priceService.Create(created);
-
-            if (result == null)
-                return BadRequest("Server Error");
-
-            return Ok(result);
+            else
+            {
+                var buyResult = await _priceService.Create(created[0]);
+                var sellResult = await _priceService.Create(created[1]);
+                if (buyResult == null && sellResult == null)
+                    return BadRequest("Buy and sell price already exist");
+                return Ok(created);
+            }
         }
 
         #endregion

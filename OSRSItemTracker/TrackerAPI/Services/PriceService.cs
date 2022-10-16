@@ -41,8 +41,10 @@ namespace TrackerAPI.Services
 
         public async Task<PriceEntity> VerifyPriceDoesNotExist(PriceEntity newPrice)
         {
-            var duplicatePrice = _context.LatestPrices.Where(x => x.HighPrice == newPrice.HighPrice && x.LowPrice == newPrice.LowPrice && x.ItemId == x.ItemId).FirstOrDefault();
-
+            var duplicatePrice = _context.LatestPrices.Where(x => x.PriceValue == newPrice.PriceValue && 
+                                                            x.PriceTime == newPrice.PriceTime &&
+                                                            x.BuyOrSell == newPrice.BuyOrSell &&
+                                                            x.ItemId == x.ItemId).FirstOrDefault();
             return duplicatePrice;
         }
 

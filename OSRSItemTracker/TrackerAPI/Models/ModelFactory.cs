@@ -1,4 +1,5 @@
 ﻿using TrackerAPI.Entities;
+using TrackerAPI.Enums;
 
 namespace TrackerAPI.Models
 {
@@ -76,32 +77,46 @@ namespace TrackerAPI.Models
 
         #region Price
 
-        public PriceEntity Create(PricePostModel model)
+        public PriceEntity[] Create(ItemPricePostModel model)
         {
             if (model.ItemId == null || model.ItemId == 0)
                 return null;
 
-            var priceEntity = new PriceEntity()
+            PriceEntity[] priceEntities = new PriceEntity[2];
+
+            var buyPriceEntity = new PriceEntity()
             {
                 ItemId = model.ItemId,
-                HighPrice = model.HighPrice,
-                HighTime = DateTime.Parse(model.HighTime),
-                LowPrice = model.LowPrice,
-                LowTime = DateTime.Parse(model.LowTime),
+                PriceValue = model.BuyPriceValue,
+                PriceTime = toDateTime(model.BuyPriceTime),
+                BuyOrSell = PriceType.Buy,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
-            };
 
-            return priceEntity;
+            };
+            priceEntities[0] = buyPriceEntity;
+
+            var sellPriceEntity = new PriceEntity()
+            {
+                ItemId = model.ItemId,
+                PriceValue = model.SellPriceValue,
+                PriceTime = toDateTime(model.SellPriceTime),
+                BuyOrSell = PriceType.Sell,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+
+            };
+            priceEntities[1] = sellPriceEntity;
+
+            return priceEntities;
         }
 
         public PriceEntity Patch(PriceEntity priceEntity, PricePostModel model)
         {
             priceEntity.ItemId = model.ItemId == 0 ? priceEntity.ItemId : model.ItemId;
-            priceEntity.HighPrice = model.HighPrice;
-            priceEntity.LowPrice = model.LowPrice;
-            priceEntity.HighTime = DateTime.Parse(model.HighTime);
-            priceEntity.LowTime = DateTime.Parse(model.LowTime);
+            priceEntity.PriceValue = model.PriceValue;
+            priceEntity.PriceTime = toDateTime(model.PriceTime);
+            priceEntity.BuyOrSell = toPriceType(model.BuyOrSell);
             priceEntity.ModifiedDate = DateTime.Now;
 
             return priceEntity;
@@ -113,10 +128,9 @@ namespace TrackerAPI.Models
                 return null;
 
             priceEntity.ItemId = model.ItemId == 0 ? priceEntity.ItemId : model.ItemId;
-            priceEntity.HighPrice = model.HighPrice;
-            priceEntity.LowPrice = model.LowPrice;
-            priceEntity.HighTime = DateTime.Parse(model.HighTime);
-            priceEntity.LowTime = DateTime.Parse(model.LowTime);
+            priceEntity.PriceValue = model.PriceValue;
+            priceEntity.PriceTime = toDateTime(model.PriceTime);
+            priceEntity.BuyOrSell = toPriceType(model.BuyOrSell);
             priceEntity.ModifiedDate = DateTime.Now;
 
             return priceEntity;
@@ -163,5 +177,22 @@ namespace TrackerAPI.Models
         }
 
         #endregion
-    }
+
+        #region utils
+
+        public DateTime toDateTime(long timestamp)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timestamp);
+        }
+
+        public PriceType toPriceType(string input)
+        {
+            PriceType priceType;
+            Enum.TryParse(input, out priceType);
+            return priceType;
+        }
+
+        #endregion
+    }    
 }

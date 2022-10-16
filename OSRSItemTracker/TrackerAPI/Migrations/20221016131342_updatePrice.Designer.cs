@@ -12,8 +12,8 @@ using TrackerAPI.Data;
 namespace TrackerAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220703100240_createdatabase")]
-    partial class createdatabase
+    [Migration("20221016131342_updatePrice")]
+    partial class updatePrice
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,26 +82,23 @@ namespace TrackerAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<int>("BuyOrSell")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("HighPrice")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("HighTime")
                         .HasColumnType("datetime2");
 
                     b.Property<long>("ItemId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("LowPrice")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("LowTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PriceTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("PriceValue")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

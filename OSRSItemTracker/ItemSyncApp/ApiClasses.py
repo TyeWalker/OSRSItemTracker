@@ -16,12 +16,20 @@ class Item:
 
 
 class Price:
-    def __init__(self, itemId, high, highTime, low, lowTime):
-        self.itemId = itemId
-        self.highPrice = high
-        self.highTime = highTime
-        self.lowPrice = low
-        self.lowTime = lowTime
+    def __init__(self, PriceValue, PriceTime, BuyOrSell):
+        self.PriceValue = PriceValue
+        self.PriceTime = PriceTime
+        self.BuyOrSell = BuyOrSell
+
+
+class PricePostModel:
+    def __init__(self, ItemId, BuyPriceValue, BuyPriceTime, SellPriceValue, SellPriceTime):
+        self.ItemId = ItemId
+        self.BuyPriceValue = BuyPriceValue
+        self.BuyPriceTime = BuyPriceTime
+        self.SellPriceValue = SellPriceValue
+        self.SellPriceTime = SellPriceTime
+
 
 
 class Volume:

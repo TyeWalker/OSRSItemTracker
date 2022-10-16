@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using TrackerAPI.Enums;
 
 namespace TrackerAPI.Entities
 {
@@ -7,10 +8,9 @@ namespace TrackerAPI.Entities
     {
         public long Id { get; set; }
         public long ItemId { get; set; }
-        public long HighPrice { get; set; }
-        public DateTime HighTime { get; set; }
-        public long LowPrice { get; set; }
-        public DateTime LowTime { get; set; }
+        public long PriceValue { get; set; }
+        public DateTime PriceTime { get; set; }
+        public PriceType BuyOrSell { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
 
